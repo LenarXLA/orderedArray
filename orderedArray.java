@@ -69,6 +69,26 @@ class OrdArray {
             return true;
         }
     }
+    
+    // Решение задачи результирующим массивом
+    public static OrdArray merge(OrdArray one, OrdArray two) {
+        OrdArray result;
+        OrdArray second;
+
+        if (one.size() >= two.size()) {
+            result = one;
+            second = two;
+        } else {
+            result = two;
+            second = one;
+        }
+
+        for (int i = 0; i < second.size(); i++) {
+            result.insert(second.a[i]);
+        }
+
+        return result;
+    }
 
     public void display() {
         for(int j = 0; j < nElems; j++)
@@ -81,26 +101,29 @@ class OrderedApp {
     public static void main(String[] args) {
         int maxSize = 100;
         OrdArray arr;
-        arr = new OrdArray(maxSize);
+        OrdArray arr1;
+        OrdArray arr2;
 
-        arr.insert(11);
-        arr.insert(33);
-        arr.insert(44);
-        arr.insert(55);
-        arr.insert(22);
-        arr.insert(00);
-        arr.insert(50);
-        arr.insert(102);
-        arr.insert(10);
+        arr1 = new OrdArray(maxSize);
+        arr2 = new OrdArray(maxSize);
 
-        int searchKey = 51;
-        if(arr.find(searchKey) != arr.size())
-            System.out.println("Found " + searchKey);
-        else
-            System.out.println("Can't find " + searchKey);
+        arr1.insert(11);
+        arr1.insert(33);
+        arr1.insert(66);
+        arr1.insert(55);
 
-        arr.delete(22);
+        arr2.insert(22);
+        arr2.insert(44);
+        arr2.insert(77);
+        arr2.insert(55);
+        arr2.insert(68);
 
-        arr.display();
+        arr2.delete(44);
+
+
+        arr1.display();
+        arr2.display();
+
+        OrdArray.merge(arr1, arr2).display();
     }
 }
